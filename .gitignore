@@ -1,0 +1,7 @@
+**/obj/
+**/.nuget/
+**/packages/
+**/[Bb]in/
+*.suo
+.pdb
+TestResults/
