@@ -8,14 +8,13 @@ using Xamarin.UITest.Queries;
 namespace UITest1
 {
 	[TestFixture(Platform.Android)]
-	
-	//[TestFixture(Platform.iOS)]
 	public class Tests
 	{
 		IApp app;
 		Platform platform;
 		public const string item = "Michael Kors Type 8 for iPhone 5/5S";
 		public const string searchTerm = "Iphone 8";
+		public const string elementId = "toolbar";
 
 		public Tests(Platform platform)
 		{
@@ -31,22 +30,19 @@ namespace UITest1
 		[Test]
 		public void AppLaunches()
 		{
-			//app.Repl();
 			app.WaitForElement(c => c.Marked("Добро пожаловать!"));
 			app.Tap(c => c.Id("nextView"));
 			app.Tap(c => c.Id("nextView"));
 			app.Tap(c => c.Id("nextView"));
 			app.Tap(c => c.Id("nextView"));
 			app.Tap(c => c.Id("nextView"));
-			app.WaitForElement(c => c.Id("toolbar"), "Timed out waiting for element");
-						
+			var element = app.WaitForElement(c => c.Id(elementId), "Timed out waiting for element");
+			Assert.IsTrue(element.Length == 1 && element[0].Id == elementId);
 		}
 
 		[Test]
 		public void AppSearch()
 		{
-			
-			//app.Repl();
 			app.WaitForElement(c => c.Marked("Добро пожаловать!"));
 			app.Tap(c => c.Id("nextView"));
 			app.Tap(c => c.Id("nextView"));
@@ -59,12 +55,10 @@ namespace UITest1
 			app.DismissKeyboard();
 			app.ScrollDownTo(c => c.Marked(item));
 			app.Tap(c => c.Marked(item));
-			app.WaitForElement(c => c.Marked(item));
+			var label = app.WaitForElement(c => c.Marked(item));
 			app.Back();
-
+			Assert.IsTrue(label[0].Text == item);
 		}
-
-		
 	}
 }
 

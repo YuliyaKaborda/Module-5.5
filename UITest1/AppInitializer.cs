@@ -17,10 +17,9 @@ namespace UITest1
 					.ApkFile("d:/Automation/Task 5.5 Mobile/test.apk")
 					.StartApp();
 			}
-
 			return ConfigureApp
-				.iOS
-				.StartApp();
+				     .iOS
+				     .StartApp();
 		}
 	}
 }
